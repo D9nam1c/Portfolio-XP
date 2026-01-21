@@ -1,0 +1,213 @@
+:root{
+  --xp-blue:#0b4aa2;
+  --xp-blue2:#2f7bdc;
+  --xp-green:#2aa52a;
+  --xp-task:#0b4aa2;
+  --win-bg:#f3f3f3;
+  --border:#1b3f7a;
+  --shadow: 0 10px 25px rgba(0,0,0,.35);
+  --radius: 8px;
+  --font: Tahoma, "Segoe UI", system-ui, sans-serif;
+}
+
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
+body{
+  margin:0;
+  font-family:var(--font);
+  overflow:hidden;
+}
+
+/* Desktop wallpaper vibe */
+.desktop{
+  position:relative;
+  height:100%;
+  background: radial-gradient(circle at 20% 20%, #6fd0ff 0%, #1b6ad6 45%, #0a3f9b 100%);
+}
+
+/* Icons */
+.icons{
+  position:absolute;
+  top:16px; left:16px;
+  display:grid;
+  grid-auto-rows:min-content;
+  gap:14px;
+  width:120px;
+}
+
+.icon{
+  all:unset;
+  cursor:pointer;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:6px;
+  border-radius:6px;
+}
+.icon:hover{ background: rgba(255,255,255,.15); }
+.icon:focus{ outline:2px solid rgba(255,255,255,.65); outline-offset:2px; }
+.icon__img{
+  width:40px; height:40px;
+  display:grid; place-items:center;
+  font-size:28px;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.4));
+}
+.icon__label{
+  margin-top:6px;
+  font-size:12px;
+  text-shadow: 0 2px 2px rgba(0,0,0,.5);
+}
+
+/* Window */
+.window-area{ position:absolute; inset:0 0 44px 0; }
+
+.window{
+  position:absolute;
+  top:70px; left:170px;
+  width:min(720px, 85vw);
+  height:min(420px, 70vh);
+  background: var(--win-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  display:none;
+}
+
+.window[data-open="true"]{ display:block; }
+
+.titlebar{
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 8px;
+  color:white;
+  user-select:none;
+  background: linear-gradient(to bottom, var(--xp-blue2), var(--xp-blue));
+  border-bottom: 1px solid rgba(255,255,255,.25);
+  cursor:grab;
+}
+
+.titlebar:active{ cursor:grabbing; }
+
+.titlebar__left{ display:flex; align-items:center; gap:8px; }
+.titlebar__title{ font-size:13px; font-weight:600; }
+.titlebar__icon{ font-size:16px; }
+
+.titlebar__buttons{ display:flex; gap:6px; }
+.winbtn{
+  width:26px; height:20px;
+  border:1px solid rgba(255,255,255,.5);
+  background: rgba(255,255,255,.15);
+  border-radius:4px;
+  color:white;
+  cursor:pointer;
+  font-weight:700;
+  line-height:1;
+}
+.winbtn:hover{ background: rgba(255,255,255,.28); }
+.winbtn.close{ background: rgba(255,80,80,.35); }
+.winbtn.close:hover{ background: rgba(255,80,80,.55); }
+
+.window__content{
+  padding:14px 14px 18px;
+  height: calc(100% - 34px);
+  overflow:auto;
+}
+
+h1{ margin: 0 0 10px; font-size:22px; }
+.muted{ color:#555; font-size:13px; }
+
+.chips{
+  list-style:none;
+  padding:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.chips li{
+  background:#e6eefc;
+  border:1px solid #c1d6ff;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+}
+
+/* Simple list */
+.list{ display:grid; gap:10px; }
+.list__item{
+  background:white;
+  border:1px solid #d0d0d0;
+  border-radius:8px;
+  padding:10px 12px;
+}
+
+/* Taskbar */
+.taskbar{
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:44px;
+  display:flex;
+  align-items:center;
+  padding:0 8px;
+  gap:8px;
+  background: linear-gradient(to bottom, #1b66d1, var(--xp-task));
+  border-top: 1px solid rgba(255,255,255,.25);
+}
+
+.start{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  height:34px;
+  padding:0 14px;
+  border-radius:18px;
+  border:1px solid rgba(0,0,0,.25);
+  background: linear-gradient(to bottom, #52d152, var(--xp-green));
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+}
+.start:hover{ filter:brightness(1.03); }
+
+.taskbar__apps{
+  flex:1;
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  padding:0 6px;
+}
+
+.taskbtn{
+  height:34px;
+  min-width:140px;
+  max-width:220px;
+  padding:0 10px;
+  border-radius:6px;
+  border:1px solid rgba(0,0,0,.25);
+  background: rgba(255,255,255,.18);
+  color:white;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.taskbtn.active{ background: rgba(255,255,255,.28); }
+
+.tray{
+  display:flex;
+  align-items:center;
+  height:34px;
+  padding:0 10px;
+  border-radius:8px;
+  background: rgba(0,0,0,.2);
+  color:white;
+  font-size:13px;
+}

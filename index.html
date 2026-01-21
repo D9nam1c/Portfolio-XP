@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XP Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Desktop -->
+  <main class="desktop" id="desktop" aria-label="Windows XP Desktop">
+    <!-- Icons -->
+    <section class="icons" aria-label="Desktop Icons">
+      <button class="icon" data-open="aboutWindow" aria-label="About Me">
+        <div class="icon__img" aria-hidden="true">👤</div>
+        <div class="icon__label">About Me</div>
+      </button>
+
+      <button class="icon" data-open="projectsWindow" aria-label="Projects">
+        <div class="icon__img" aria-hidden="true">📁</div>
+        <div class="icon__label">Projects</div>
+      </button>
+
+      <button class="icon" data-open="contactWindow" aria-label="Contact">
+        <div class="icon__img" aria-hidden="true">✉️</div>
+        <div class="icon__label">Contact</div>
+      </button>
+
+      <a class="icon" href="resume.pdf" target="_blank" rel="noopener" aria-label="Resume PDF">
+        <div class="icon__img" aria-hidden="true">📄</div>
+        <div class="icon__label">Resume</div>
+      </a>
+    </section>
+
+    <!-- Windows -->
+    <section class="window-area" aria-label="Open Windows">
+
+      <!-- ABOUT -->
+      <article class="window" id="aboutWindow" role="dialog" aria-label="About Me" data-open="true">
+        <header class="titlebar" data-drag>
+          <div class="titlebar__left">
+            <span class="titlebar__icon" aria-hidden="true">👤</span>
+            <span class="titlebar__title">About Me</span>
+          </div>
+          <div class="titlebar__buttons">
+            <button class="winbtn" data-action="minimize" aria-label="Minimize">—</button>
+            <button class="winbtn" data-action="maximize" aria-label="Maximize">▢</button>
+            <button class="winbtn close" data-action="close" aria-label="Close">✕</button>
+          </div>
+        </header>
+        <div class="window__content">
+          <h1>Hi, I’m Volodymyr 👋</h1>
+          <p>Software engineering student. I build apps, systems, and fun UI experiments.</p>
+          <ul class="chips">
+            <li>Swift / iOS</li>
+            <li>Java</li>
+            <li>C / low-level</li>
+            <li>Data Structures</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- PROJECTS -->
+      <article class="window" id="projectsWindow" role="dialog" aria-label="Projects" data-open="false">
+        <header class="titlebar" data-drag>
+          <div class="titlebar__left">
+            <span class="titlebar__icon" aria-hidden="true">📁</span>
+            <span class="titlebar__title">Projects</span>
+          </div>
+          <div class="titlebar__buttons">
+            <button class="winbtn" data-action="minimize" aria-label="Minimize">—</button>
+            <button class="winbtn" data-action="maximize" aria-label="Maximize">▢</button>
+            <button class="winbtn close" data-action="close" aria-label="Close">✕</button>
+          </div>
+        </header>
+        <div class="window__content">
+          <div class="list">
+            <div class="list__item">
+              <strong>CampusEats</strong>
+              <div class="muted">SwiftUI food ordering app (iPhone/iPad).</div>
+            </div>
+            <div class="list__item">
+              <strong>GISDB</strong>
+              <div class="muted">Custom data structures + spatial indexing.</div>
+            </div>
+            <div class="list__item">
+              <strong>Space Invaders Clone</strong>
+              <div class="muted">SpriteKit game with sound + scoring.</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CONTACT -->
+      <article class="window" id="contactWindow" role="dialog" aria-label="Contact" data-open="false">
+        <header class="titlebar" data-drag>
+          <div class="titlebar__left">
+            <span class="titlebar__icon" aria-hidden="true">✉️</span>
+            <span class="titlebar__title">Contact</span>
+          </div>
+          <div class="titlebar__buttons">
+            <button class="winbtn" data-action="minimize" aria-label="Minimize">—</button>
+            <button class="winbtn" data-action="maximize" aria-label="Maximize">▢</button>
+            <button class="winbtn close" data-action="close" aria-label="Close">✕</button>
+          </div>
+        </header>
+        <div class="window__content">
+          <p>Best way to reach me:</p>
+          <ul>
+            <li><a href="mailto:you@example.com">you@example.com</a></li>
+            <li><a href="https://github.com/yourname" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Taskbar -->
+    <footer class="taskbar" aria-label="Taskbar">
+      <button class="start" id="startBtn" aria-haspopup="true" aria-expanded="false">
+        <span class="start__logo" aria-hidden="true">🪟</span>
+        Start
+      </button>
+
+      <div class="taskbar__apps" id="taskbarApps" aria-label="Open apps"></div>
+
+      <div class="tray" aria-label="System tray">
+        <span class="tray__clock" id="clock">3:14 PM</span>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
