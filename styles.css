@@ -1,12 +1,16 @@
 :root{
-  --xp-blue:#0b4aa2;
-  --xp-blue2:#2f7bdc;
-  --xp-green:#2aa52a;
-  --xp-task:#0b4aa2;
-  --win-bg:#f3f3f3;
-  --border:#1b3f7a;
-  --shadow: 0 10px 25px rgba(0,0,0,.35);
-  --radius: 8px;
+  --xp-luna1:#3b7ddd;
+  --xp-luna2:#0b49a4;
+  --xp-luna3:#0a3c8f;
+  --xp-highlight: rgba(255,255,255,.55);
+
+  --xp-border-dark:#1b3f7a;
+  --xp-border-light:#9dc2ff;
+
+  --win-bg:#f6f6f6;
+  --glass: rgba(255,255,255,.12);
+  --shadow: 0 18px 40px rgba(0,0,0,.35);
+  --radius: 10px;
   --font: Tahoma, "Segoe UI", system-ui, sans-serif;
 }
 
@@ -48,12 +52,12 @@ body{
 }
 .icon:hover{ background: rgba(255,255,255,.15); }
 .icon:focus{ outline:2px solid rgba(255,255,255,.65); outline-offset:2px; }
-.icon__img{
-  width:40px; height:40px;
-  display:grid; place-items:center;
-  font-size:28px;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,.4));
+.icon__img img{
+  width:30px;
+  height:30px;
+  image-rendering: auto;
 }
+
 .icon__label{
   margin-top:6px;
   font-size:12px;
@@ -66,56 +70,97 @@ body{
 .window{
   position:absolute;
   top:70px; left:170px;
-  width:min(720px, 85vw);
-  height:min(420px, 70vh);
+  width:min(760px, 88vw);
+  height:min(460px, 72vh);
   background: var(--win-bg);
-  border: 2px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
   overflow:hidden;
   display:none;
+
+  /* XP bevel + modern shadow */
+  border: 1px solid var(--xp-border-dark);
+  box-shadow: var(--shadow);
+
+  /* inner bevel */
+  outline: 1px solid rgba(255,255,255,.25);
+  outline-offset: -2px;
 }
 
 .window[data-open="true"]{ display:block; }
 
 .titlebar{
-  height:34px;
+  height:36px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 8px;
+  padding:0 8px 0 10px;
   color:white;
   user-select:none;
-  background: linear-gradient(to bottom, var(--xp-blue2), var(--xp-blue));
-  border-bottom: 1px solid rgba(255,255,255,.25);
+
+  background:
+    linear-gradient(to bottom,
+      rgba(255,255,255,.35) 0%,
+      rgba(255,255,255,.10) 18%,
+      rgba(0,0,0,.08) 19%,
+      rgba(0,0,0,.00) 100%),
+    linear-gradient(to bottom, var(--xp-luna1), var(--xp-luna2));
+
+  border-bottom: 1px solid rgba(0,0,0,.25);
+  box-shadow: inset 0 1px 0 var(--xp-highlight);
   cursor:grab;
 }
 
 .titlebar:active{ cursor:grabbing; }
 
 .titlebar__left{ display:flex; align-items:center; gap:8px; }
-.titlebar__title{ font-size:13px; font-weight:600; }
+.titlebar__title{ 
+  font-size:13px; 
+  font-weight:600; 
+  text-shadow: 0 1px 0 rgba(0,0,0,.35);
+}
 .titlebar__icon{ font-size:16px; }
 
 .titlebar__buttons{ display:flex; gap:6px; }
+
+/* XP-ish window control buttons */
 .winbtn{
-  width:26px; height:20px;
-  border:1px solid rgba(255,255,255,.5);
-  background: rgba(255,255,255,.15);
+  width:26px; height:22px;
   border-radius:4px;
+  border:1px solid rgba(0,0,0,.35);
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.10));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 1px 0 rgba(0,0,0,.15);
   color:white;
   cursor:pointer;
-  font-weight:700;
   line-height:1;
+  font-weight:900;
 }
-.winbtn:hover{ background: rgba(255,255,255,.28); }
-.winbtn.close{ background: rgba(255,80,80,.35); }
+
+.winbtn:hover{
+  filter:brightness(1.05);
+  transform: translateY(-1px);
+}
+.winbtn:active{
+  transform: translateY(0px);
+  filter:brightness(.98);
+}
+
+/* Colorize like XP */
+.winbtn[data-action="minimize"]{ background: linear-gradient(to bottom, #7fb1ff, #2d6fe0); }
+.winbtn[data-action="maximize"]{ background: linear-gradient(to bottom, #7fb1ff, #2d6fe0); }
+.winbtn.close{ background: linear-gradient(to bottom, #ff7c7c, #d32020); }
 .winbtn.close:hover{ background: rgba(255,80,80,.55); }
 
 .window__content{
   padding:14px 14px 18px;
   height: calc(100% - 34px);
   overflow:auto;
+
+  /* modern but subtle (витончений/ненавязчивьій)*/
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.75), rgba(255,255,255,.35));
 }
 
 h1{ margin: 0 0 10px; font-size:22px; }
