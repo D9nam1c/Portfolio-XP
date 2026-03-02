@@ -7,42 +7,62 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Booting Screen -->
+   <div class="boot-screen" id="bootScreen" aria-hidden="true">
+    
+   </div>
   <!-- Desktop -->
   <main class="desktop" id="desktop" aria-label="Windows XP Desktop">
     <!-- Icons -->
     <section class="icons" aria-label="Desktop Icons">
-
-      <button class="icon" data-open="aboutWindow" aria-label="About Me">
+      <button class="icon" data-open="aboutWindow" data-icon-id="about" aria-label="About Me">
         <div class="icon__img">
           <img src="assets/icons/computer.png" alt="" />
         </div>
         <div class="icon__label">About Me</div>
       </button>
 
-      <button class="icon" data-open="projectsWindow">
+      <button class="icon" data-icon-id="projects" data-open="projectsWindow">
         <div class="icon__img">
           <img src="assets/icons/documents.png" alt="" />
         </div>
-        <div class="icon__label">Projects</div>
+        <div class="icon__label">My Projects</div>
       </button>
 
-
-      <button class="icon" data-open="contactWindow" aria-label="Contact">
-        <div class="icon__img" aria-hidden="true">✉️</div>
+      <button class="icon" data-open="contactWindow" data-icon-id="contact" aria-label="Contact">
+        <div class="icon__img">
+          <img src="assets/icons/contact.png" alt="" />
+        </div>
         <div class="icon__label">Contact</div>
       </button>
 
-      <a class="icon" href="resume.pdf" target="_blank" rel="noopener" aria-label="Resume PDF">
-        <div class="icon__img" aria-hidden="true">📄</div>
+      <button class="icon" data-open="bin" data-icon-id="recycle" aria-label="Recycle">
+        <div class="icon__img">
+          <img src="assets/icons/Recycle Bin (full).png" alt="" />
+        </div>
+        <div class="icon__label">Recycle Bin</div>
+      </button>
+
+      <button class="icon" data-href="Resume.pdf" data-icon-id="resume" aria-label="Resume PDF">
+        <div class="icon__img"> 
+          <img src="assets/icons/Document.png" alt="">
+        </div>
         <div class="icon__label">Resume</div>
-      </a>
+      </button>
+
+      <button class="icon" data-href="https://store.steampowered.com/app/10/CounterStrike/" data-icon-id="CS_1.6" aria-label="Counter_Strike">
+        <div class="icon__img">
+          <img src="assets/icons/counter-strike.png" alt="">
+        </div>
+        <div class="icon__label">Counter Strike</div>
+      </button>
     </section>
 
     <!-- Windows -->
     <section class="window-area" aria-label="Open Windows">
 
       <!-- ABOUT -->
-      <article class="window" id="aboutWindow" role="dialog" aria-label="About Me" data-open="true">
+      <article class="window" id="aboutWindow" role="dialog" aria-label="About Me" data-open="false">
         <header class="titlebar" data-drag>
           <div class="titlebar__left">
             <span class="titlebar__icon" aria-hidden="true">👤</span>
@@ -65,6 +85,29 @@
           </ul>
         </div>
       </article>
+
+      <!-- BIN -->
+       <article class="window" id="bin" role="dialog" aria-label="Recycle" data-open="false">
+        <header class="titlebar" data-drag>
+          <div class="titlebar__left">
+            <span class="titlebar__icon" aria-hidden="true"><img src="assets/icons/Recycle Bin (full).png" alt=""></span>
+            <span class="titlebar__title">Recycle Bin</span>
+          </div>
+          <div class="titlebar__buttons">
+            <button class="winbtn" data-action="minimize" aria-label="Minimize">—</button>
+            <button class="winbtn" data-action="maximize" aria-label="Maximize">▢</button>
+            <button class="winbtn close" data-action="close" aria-label="Close">✕</button>
+          </div>
+        </header>
+        <div class="window__content">
+          <div class="bin-item">
+            <div class="icon__img">
+              <img src="assets/icons/Detail View.png" alt="">
+            </div>
+            <div class="icon__label">Rejected Applications</div>
+          </div>
+        </div>
+       </article>
 
       <!-- PROJECTS -->
       <article class="window" id="projectsWindow" role="dialog" aria-label="Projects" data-open="false">
@@ -122,11 +165,138 @@
 
     </section>
 
+    <!-- Start Menu -->
+    <aside class="start-menu" id="startMenu" hidden aria-label="Start Menu">
+      <div class="start-menu__header">
+        <img src="assets/icons/pfp.png" alt="" />
+        <span>d9nam1c</span>
+      </div>
+
+      <div class="start-menu__columns">
+        <div class="start-menu__col start-menu__col--left">
+          <button class="start-item" data-open="aboutWindow">
+            <img src="assets/icons/computer.png" alt="" />
+            <span>About Me</span>
+          </button>
+          <button class="start-item" data-open="projectsWindow">
+            <img src="assets/icons/documents.png" alt="" />
+            <span>My Projects</span>
+          </button>
+          <button class="start-item" data-open="contactWindow">
+            <img src="assets/icons/contact.png" alt="" />
+            <span>Contact</span>
+          </button>
+          <button class="start-item" data-href="Resume.pdf">
+            <img src="assets/icons/Document.png" alt="" />
+            <span>Resume</span>
+          </button>
+          <button class="start-item" data-open="bin">
+            <img src="assets/icons/Recycle Bin (full).png" alt="" />
+            <span>Recycle Bin</span>
+          </button>
+
+          <button
+            class="start-allprograms"
+            id="allProgramsBtn"
+            data-action="all-programs"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="allProgramsMenu"
+            type="button"
+          >
+            <span>All Programs</span>
+            <span class="start-allprograms__arrow" aria-hidden="true">▶</span>
+          </button>
+        </div>
+
+        <div class="start-menu__col start-menu__col--right">
+          <button class="start-item start-item--right" data-open="projectsWindow">
+            <img src="assets/icons/Folder Closed.png" alt="" />
+            <span>My Documents</span>
+          </button>
+          <button class="start-item start-item--right" data-open="projectsWindow">
+            <img src="assets/icons/Detail View.png" alt="" />
+            <span>My Recent Documents</span>
+          </button>
+          <button class="start-item start-item--right" data-open="aboutWindow">
+            <img src="assets/icons/computer.png" alt="" />
+            <span>My Computer</span>
+          </button>
+          <button class="start-item start-item--right" data-open="contactWindow">
+            <img src="assets/icons/Email.png" alt="" />
+            <span>Help and Support</span>
+          </button>
+          <button class="start-item start-item--right" data-open="contactWindow">
+            <img src="assets/icons/Go.png" alt="" />
+            <span>Search</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="start-menu__footer">
+        <div class="start-menu__power">
+          <button class="start-pill start-pill--warn" data-action="logoff">Log Off</button>
+          <button class="start-pill start-pill--danger" data-action="shutdown">Turn Off Computer</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- All Programs flyout -->
+    <nav class="start-flyout" id="allProgramsMenu" hidden aria-label="All Programs">
+      <button class="flyout-item" type="button" data-open="projectsWindow">
+        <img src="assets/icons/Folder Closed.png" alt="" />
+        <span>Set Program Access and Defaults</span>
+      </button>
+
+      <button class="flyout-item" type="button" data-open="projectsWindow">
+        <img src="assets/icons/Go.png" alt="" />
+        <span>Windows Update</span>
+      </button>
+
+      <div class="flyout-sub">
+        <button class="flyout-item flyout-item--submenu" type="button">
+          <img src="assets/icons/Folder Closed.png" alt="" />
+          <span>Accessories</span>
+        </button>
+        <div class="start-submenu" aria-label="Accessories">
+          <button class="flyout-item" type="button" data-open="projectsWindow">
+            <img src="assets/icons/documents.png" alt="" />
+            <span>My Projects</span>
+          </button>
+          <button class="flyout-item" type="button" data-href="Resume.pdf">
+            <img src="assets/icons/Document.png" alt="" />
+            <span>Resume</span>
+          </button>
+          <button class="flyout-item" type="button" data-open="contactWindow">
+            <img src="assets/icons/contact.png" alt="" />
+            <span>Contact</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="flyout-sub">
+        <button class="flyout-item flyout-item--submenu" type="button">
+          <img src="assets/icons/Folder Closed.png" alt="" />
+          <span>Games</span>
+        </button>
+        <div class="start-submenu" aria-label="Games">
+          <button class="flyout-item" type="button" data-open="projectsWindow">
+            <img src="assets/icons/counter-strike.png" alt="" />
+            <span>Counter-Strike</span>
+          </button>
+        </div>
+      </div>
+
+      <button class="flyout-item" type="button" data-open="aboutWindow">
+        <img src="assets/icons/Detail View.png" alt="" />
+        <span>Startup</span>
+      </button>
+    </nav>
+
     <!-- Taskbar -->
     <footer class="taskbar" aria-label="Taskbar">
       <button class="start" id="startBtn" aria-haspopup="true" aria-expanded="false">
-        <span class="start__logo" aria-hidden="true">🪟</span>
-        Start
+        start
       </button>
 
       <div class="taskbar__apps" id="taskbarApps" aria-label="Open apps"></div>
