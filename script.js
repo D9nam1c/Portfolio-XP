@@ -355,22 +355,13 @@ openWindow("aboutWindow");
   const STEP_Y = 92;     // default vertical spacing
   const DRAG_THRESHOLD = 4;
 
-  const keyFor = (id) => `xp:iconpos:${id}`;
-  const loadPos = (id) => {
-    try { return JSON.parse(localStorage.getItem(keyFor(id)) || "null"); }
-    catch { return null; }
-  };
-  const savePos = (id, x, y) => {
-    localStorage.setItem(keyFor(id), JSON.stringify({ x, y }));
-  };
-
   const setPos = (el, x, y) => {
     el.style.left = `${x}px`;
     el.style.top = `${y}px`;
   };
 
-  // Initial placement: load saved positions, otherwise stack vertically.
-  // Special-case: Recycle Bin defaults to bottom-right on first load.
+  // Initial placement: always reset to default positions on page load.
+  // Special-case: Recycle Bin defaults to bottom-right.
   const placeDefaults = () => {
     const maxW = container.clientWidth;
     const maxH = container.clientHeight;
@@ -378,12 +369,6 @@ openWindow("aboutWindow");
     icons.forEach((icon, i) => {
       const id = icon.dataset.iconId || `icon-${i}`;
       icon.dataset.iconId = id;
-
-      const saved = loadPos(id);
-      if (saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)) {
-        setPos(icon, saved.x, saved.y);
-        return;
-      }
 
       // Default positions
       if (id === "recycle") {
@@ -395,11 +380,11 @@ openWindow("aboutWindow");
         setPos(icon, PAD, PAD + i * STEP_Y);
       }
 
-      if (id == "CS_1.6") {
+      if (id == "CounterStrike") {
         // upper right
-        setPos(icon, maxW, maxH);
-      } else {
-        setPos(icon, PAD, PAD + i * STEP_Y);
+        const x = Math.max(PAD, maxW - icon.offsetWidth - PAD);
+        const y = Math.max(PAD, -maxH);
+        setPos(icon, x, y);
       }
     });
   };
@@ -425,7 +410,6 @@ openWindow("aboutWindow");
 
     drag = {
       icon,
-      id: icon.dataset.iconId,
       pointerId: e.pointerId,
       startX: e.clientX,
       startY: e.clientY,
@@ -464,12 +448,6 @@ openWindow("aboutWindow");
     if (!drag) return;
 
     drag.icon.classList.remove("dragging");
-
-    if (drag.moved) {
-      const x = parseFloat(drag.icon.style.left) || 0;
-      const y = parseFloat(drag.icon.style.top) || 0;
-      savePos(drag.id, x, y);
-    }
 
     drag = null;
 
