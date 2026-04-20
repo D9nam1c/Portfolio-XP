@@ -410,6 +410,8 @@ setInterval(updateClock, 1000 * 15);
     const maxW = container.clientWidth || window.innerWidth;
     const maxH = container.clientHeight || (window.innerHeight - 44);
 
+    const leftColumnOrder = ["about", "projects", "accom", "contact", "resume"];
+
     icons.forEach((icon, i) => {
       const id = (icon.dataset.iconId || `icon-${i}`).toLowerCase();
 
@@ -432,10 +434,12 @@ setInterval(updateClock, 1000 * 15);
         return;
       }
 
-      if (id === "accom") {
+      const row = leftColumnOrder.indexOf(id);
+      if (row !== -1) {
         // middle right
         const x = PAD;
-        const y = Math.max(PAD, (maxH - icon.offsetHeight) / 2) - maxH * 0.1 + icon.offsetHeight / 2.4;
+        const y = PAD + row * STEP_Y;
+        // const y = Math.max(PAD, (maxH - icon.offsetHeight) / 2) - maxH * 0.1 + icon.offsetHeight / 2.4;
         setPos(icon, x, y);
         return;
       }
