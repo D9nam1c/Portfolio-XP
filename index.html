@@ -7,12 +7,47 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Booting Screen -->
-   <div class="boot-screen" id="bootScreen" aria-hidden="true">
+  <!-- Login Screen -->
+   <div class="login-screen" id="loginScreen" data-screen="login" hidden role="status" aria-live="polite" aria-label="XP Welcome">
+    <div class="login__panel">
+      <img class="os_logotype" src="assets/icons/os_logo.png" alt="logo" />
+      <div class="system__label">To begin, click your user name</div>
+      <button class="login__icon" data-open="welcome__loader" data-icon-id="login" aria-label="Login click">
+        <img class="user__pfp" src="assets/icons/pfp.png" alt="User avatar" />
+        <div class="user__label">Volodymyr</div>
+      </button>
+    </div>
+    <div class="login__separator" aria-hidden="true"></div>
+    <button class="turn__off" data-open="goodbye" data-icon-id="shutoff" aria-label="Turn Off">
+      <img class="shut__down" src="assets/icons/shutdown.png" alt="Shutdown" />
+      <div class="power__label">Turn off Computer</div>
+    </button>
+  </div>
 
-   </div>
+<!-- Booting Screen -->
+<div class="welcome-screen" id="welcomeScreen" data-screen="welcome" hidden role="status" aria-live="polite" aria-label="XP Welcome">
+  <div class="welcome__title-row">
+    <div class="welcome__label">welcome</div>
+    <div class="welcome__loader" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</div>
+
   <!-- Desktop -->
   <main class="desktop" id="desktop" aria-label="Windows XP Desktop">
+
+    <!-- Antivirus Pop-up -->
+    <dialog class="antivirus-popup" id="antivirusPopup">
+      <button class="antiv__close" data-action="close" aria-label="Close">✕</button>
+      <h2> 
+        <img class="alert" src= "assets/icons/antiv_alert.png" alt="Antivirus Alert" />
+        Your computer might be at risk 
+      </h2>
+      <p> Your antivirus software might be out of date </p>
+      <p> Click here to update now. </p>
+    </dialog>
+
     <!-- Icons -->
     <section class="icons" aria-label="Desktop Icons">
       <button class="icon" data-open="aboutWindow" data-icon-id="about" aria-label="About Me">
@@ -43,7 +78,7 @@
         <div class="icon__label">Recycle Bin</div>
       </button>
 
-      <button class="icon" data-href="Resume.pdf" data-icon-id="resume" aria-label="Resume PDF">
+      <button class="icon" data-open="resumeWindow" data-icon-id="resume" aria-label="Resume">
         <div class="icon__img"> 
           <img src="assets/icons/Document.png" alt="">
         </div>
@@ -55,6 +90,13 @@
           <img src="assets/icons/counter-strike.png" alt="">
         </div>
         <div class="icon__label">Counter Strike</div>
+      </button>
+
+      <button class="icon" data-open="successes" data-icon-id="accom" aria-label="Accomplishments">
+        <div class="icon__img">
+          <img src="assets/icons/rewards.png" alt="">
+        </div>
+        <div class="icon__label">Accomplishments</div>
       </button>
     </section>
 
@@ -76,16 +118,77 @@
         </header>
         <div class="window__content">
           <h1>Hi, I’m Volodymyr 👋</h1>
-          <p>Software engineering student. I build apps, systems, and fun UI experiments.</p>
+          <p>I'm a Computer Science student. I build apps, systems, and fun UI experiments.</p>
+          <p> Stuff I worked with: </p>
           <ul class="chips">
             <li>Swift / iOS</li>
             <li>Java</li>
-            <li>C / low-level</li>
-            <li>Data Structures</li>
+            <li>C</li>
+            <li>C++</li>
+            <li>Java Script</li>
+            <li>Python</li>
+            <li>CSS</li>
+            <li>HTML</li>
+          </ul>
+          <ul class="chips">
+            <li>Git</li>
+            <li>GitHub</li>
+            <li>Kiro / AWS</li>
+            <li>iSH / Alpine Linux/ iOS</li>
+            <li>PyCharm / Python</li>
+            <li>VS Code</li>
+            <li>Eclipse</li>
+            <li>XCode / Apple</li>
+          </ul>
+          <ul class="chips">
+            <li>LightBurn / Wood Laser Cutting</li>
           </ul>
         </div>
       </article>
 
+      <!-- Resume -->
+        <article class="window" id="resumeWindow" role="dialog" aria-label="Resume PDF" data-open="false">
+          <header class="titlebar" data-drag>
+            <div class="titlebar__left">
+              <span class="titlebar__icon" aria-hidden="true">
+                <img src="assets/icons/Document.png" alt="">
+              </span>
+              <span class="titlebar__title">Resume</span>
+            </div>
+            <div class="titlebar__buttons">
+              <button class="winbtn" data-action="minimize" aria-label="Minimize">—</button>
+              <button class="winbtn" data-action="maximize" aria-label="Maximize">▢</button>
+              <button class="winbtn close" data-action="close" aria-label="Close">✕</button>
+            </div>
+          </header>
+          <div class="window__content">
+            <embed src="Resume.pdf" type="application/pdf" width="100%" height="100%">
+          </div>
+        </article>
+
+      <!-- Accomplishments -->
+        <article class="window" id="successes" role="dialog" aria-label="Accomplishments" data-open="false">
+          <header class="titlebar" data-drag>
+            <div class="titlebar__left">
+              <span class="titlebar__icon" >
+                <img src="assets/icons/rewards.png" alt="">
+              </span>
+              <span class="titlebar__title">Accomplishments</span>
+            </div>
+            <div class="titlebar__buttons">
+              <button class="winbtn" data-action="minimize" aria-label="Minimize">—</button>
+              <button class="winbtn" data-action="maximize" aria-label="Maximize">▢</button>
+              <button class="winbtn close" data-action="close" aria-label="Close">✕</button>
+            </div>
+          </header>
+          <div class="window__content">
+            <div class="list">
+              <button class="accom__item" data-href="https://devpost.com/software/ai-notetaker-app">
+                <strong>Hackathon</strong>
+                  <p>AWS Kiro x CS Careers Hackathon participant / AI Notetaker App</p>
+              </button>
+          </div>
+        </article>
       <!-- BIN -->
        <article class="window" id="bin" role="dialog" aria-label="Recycle" data-open="false">
         <header class="titlebar" data-drag>
@@ -101,10 +204,10 @@
         </header>
         <div class="window__content">
           <div class="bin-item">
-            <div class="icon__img">
+            <div class="bin__img">
               <img src="assets/icons/Detail View.png" alt="">
+              <p>Rejected Applications</p>
             </div>
-            <div class="icon__label">Rejected Applications</div>
           </div>
         </div>
        </article>
@@ -144,7 +247,9 @@
       <article class="window" id="contactWindow" role="dialog" aria-label="Contact" data-open="false">
         <header class="titlebar" data-drag>
           <div class="titlebar__left">
-            <span class="titlebar__icon" aria-hidden="true">✉️</span>
+            <span class="titlebar__icon" aria-hidden="true">
+              <img src = "assets/icons/contact.png" alt="contact">
+            </span>
             <span class="titlebar__title">Contact</span>
           </div>
           <div class="titlebar__buttons">
@@ -154,11 +259,25 @@
           </div>
         </header>
         <div class="window__content">
-          <p>Best way to reach me:</p>
+          <p>Best ways to reach me:</p>
           <ul>
-            <li><a href="mailto:you@example.com">you@example.com</a></li>
-            <li><a href="https://github.com/yourname" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="https://www.linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a></li>
+            <div class = "contact__img">
+              <img src = assets/icons/Email.png alt="email">
+              <a href="mailto:danielfox9092@gmail.com">E-mail</a>
+              <p>(danielfox9092@gmail.com)</p>
+            </div>
+            <div class = "contact__img">
+              <img src = assets/icons/github.jpg alt="github">
+              <a href="https://github.com/D9nam1c" target="_blank" rel="noopener">GitHub</a>
+            </div> 
+            <div class = "contact__img">
+              <img src = assets/icons/linkedin.png alt="linkedin">
+              <a href="https://www.linkedin.com/in/volodymyr-sofishchenko-4a2323257/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+            <div class = "contact__img">
+              <img src = "assets/icons/Discord.png" alt="Discord">
+              <p> My discord tag: d9nam1c </p>
+            </div>
           </ul>
         </div>
       </article>
@@ -169,7 +288,7 @@
     <aside class="start-menu" id="startMenu" hidden aria-label="Start Menu">
       <div class="start-menu__header">
         <img src="assets/icons/pfp.png" alt="" />
-        <span>d9nam1c</span>
+        <span>Volodymyr</span>
       </div>
 
       <div class="start-menu__columns">
@@ -214,7 +333,7 @@
             <img src="assets/icons/Folder Closed.png" alt="" />
             <span>My Documents</span>
           </button>
-          <button class="start-item start-item--right" data-open="projectsWindow">
+          <button class="start-item start-item--right" data-open="lastClosedWindow">
             <img src="assets/icons/Detail View.png" alt="" />
             <span>My Recent Documents</span>
           </button>
@@ -222,13 +341,9 @@
             <img src="assets/icons/computer.png" alt="" />
             <span>My Computer</span>
           </button>
-          <button class="start-item start-item--right" data-open="contactWindow">
+          <button class="start-item start-item--right" data-href="https://github.com/D9nam1c/Portfolio-XP">
             <img src="assets/icons/Email.png" alt="" />
             <span>Help and Support</span>
-          </button>
-          <button class="start-item start-item--right" data-open="contactWindow">
-            <img src="assets/icons/Go.png" alt="" />
-            <span>Search</span>
           </button>
         </div>
       </div>
@@ -243,12 +358,7 @@
 
     <!-- All Programs flyout -->
     <nav class="start-flyout" id="allProgramsMenu" hidden aria-label="All Programs">
-      <button class="flyout-item" type="button" data-open="projectsWindow">
-        <img src="assets/icons/Folder Closed.png" alt="" />
-        <span>Set Program Access and Defaults</span>
-      </button>
-
-      <button class="flyout-item" type="button" data-open="projectsWindow">
+      <button class="flyout-item" type="button" data-href="https://github.com/D9nam1c/Portfolio-XP/releases">
         <img src="assets/icons/Go.png" alt="" />
         <span>Windows Update</span>
       </button>
@@ -286,11 +396,6 @@
           </button>
         </div>
       </div>
-
-      <button class="flyout-item" type="button" data-open="aboutWindow">
-        <img src="assets/icons/Detail View.png" alt="" />
-        <span>Startup</span>
-      </button>
     </nav>
 
     <!-- Taskbar -->
@@ -302,6 +407,9 @@
       <div class="taskbar__apps" id="taskbarApps" aria-label="Open apps"></div>
 
       <div class="tray" aria-label="System tray">
+        <p> EN </p>
+        <img class = "antivirus" src="assets/icons/antivirus.gif" alt="Antivirus" aria-hidden="true" />
+        <img class="internet__connection" src="assets/icons/internet.gif" alt="Internet" aria-hidden="true" />
         <span class="tray__clock" id="clock">3:14 PM</span>
       </div>
     </footer>

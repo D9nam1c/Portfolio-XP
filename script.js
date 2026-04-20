@@ -7,7 +7,47 @@ const startMenu = document.getElementById("startMenu");
 const allProgramsBtn = document.getElementById("allProgramsBtn");
 const allProgramsMenu = document.getElementById("allProgramsMenu");
 
+const login = document.getElementById("loginScreen");
+const welcome = document.getElementById("welcomeScreen");
+const desktop = document.getElementById("desktop");
+const loginBtn = document.querySelector(".login__icon");
+const shutdown = document.querySelector(".turn__off");
+
+const accomItem = document.querySelector(".accom__item");
+const accomWindow = document.getElementById("successes");
+
 let z = 100;
+let closedId = null;
+// function initLoginFlow() {
+//   if (login) login.hidden = false;
+//   if (welcome) welcome.hidden = true;
+//   if (desktop) desktop.hidden = true;
+
+//   loginBtn?.addEventListener("click", () => {
+//     if (login) login.hidden = true;
+//     if (welcome) welcome.hidden = false;
+//     if (desktop) desktop.hidden = true;
+
+//     // XP-like short welcome delay before showing desktop
+//     setTimeout(() => {
+//       if (welcome) welcome.hidden = true;
+//       if (desktop) desktop.hidden = false;
+//       window.dispatchEvent(new Event("desktop-shown"));
+//     }, 3000);
+//   });
+
+//   shutdown?.addEventListener("click", () => {
+//     // Browser tabs usually can't be closed unless opened by script.
+//     window.open("", "_self");
+//     window.close();
+//   });
+// }
+
+// if (document.readyState === "loading") {
+//   window.addEventListener("load", initLoginFlow, { once: true });
+// } else {
+//   initLoginFlow();
+// }
 
 // ---------- helpers ----------
 function isStartMenuOpen() {
@@ -121,8 +161,8 @@ function closeWindow(win) {
   win.dataset.open = "false";
   win.style.display = "none";
   win.classList.remove("active");
+  closedId = win.id;
   setActiveTask(win, false);
-
   // optional: remove from taskbar on close
   removeTaskButton(win.id);
 }
@@ -182,6 +222,12 @@ startMenu?.addEventListener("click", (e) => {
   if (!target || !startMenu.contains(target)) return;
 
   if (target.dataset.open) {
+    // "My Recent Documents" uses a placeholder open id.
+    // Resolve it to the real last closed window id at click time.
+    if (target.dataset.open === "lastClosedWindow") {
+      if (closedId) openWindow(closedId);
+      return;
+    }
     openWindow(target.dataset.open);
     return;
   }
@@ -198,13 +244,11 @@ startMenu?.addEventListener("click", (e) => {
     return;
   }
   if (action === "logoff") {
-    minimizeAllWindows();
-    setStartMenuOpen(false);
-    return;
+    desktop.hidden = true;
+    login.hidden = false;
   }
   if (action === "shutdown") {
-    closeAllWindows();
-    setStartMenuOpen(false);
+    window.close();
   }
 });
 
@@ -261,7 +305,7 @@ iconsContainer?.addEventListener("dblclick", (e) => {
   }
 });
 
-// (Optional) If you also want single-click to open, uncomment:
+// (Optional) For single-click to open:
 // iconsContainer?.addEventListener("click", (e) => {
 //   const icon = e.target.closest(".icon[data-open]");
 //   if (!icon) return;
@@ -343,7 +387,7 @@ updateClock();
 setInterval(updateClock, 1000 * 15);
 
 // Open About by default (comment out if you don't want auto-open)
-openWindow("aboutWindow");
+//openWindow("aboutWindow");
 
 // ---------- desktop icon dragging (Safari-friendly) ----------
 (function setupDraggableDesktopIcons() {
@@ -363,12 +407,11 @@ openWindow("aboutWindow");
   // Initial placement: always reset to default positions on page load.
   // Special-case: Recycle Bin defaults to bottom-right.
   const placeDefaults = () => {
-    const maxW = container.clientWidth;
-    const maxH = container.clientHeight;
+    const maxW = container.clientWidth || window.innerWidth;
+    const maxH = container.clientHeight || (window.innerHeight - 44);
 
     icons.forEach((icon, i) => {
-      const id = icon.dataset.iconId || `icon-${i}`;
-      icon.dataset.iconId = id;
+      const id = (icon.dataset.iconId || `icon-${i}`).toLowerCase();
 
       // Default positions
       if (id === "recycle") {
@@ -376,21 +419,36 @@ openWindow("aboutWindow");
         const x = Math.max(PAD, maxW - icon.offsetWidth - PAD);
         const y = Math.max(PAD, maxH - icon.offsetHeight - PAD);
         setPos(icon, x, y);
-      } else {
-        setPos(icon, PAD, PAD + i * STEP_Y);
-      }
+        return;
+      } // else {
+      //   setPos(icon, PAD, PAD + i * STEP_Y);
+      // }
 
-      if (id == "CounterStrike") {
+      if (id === "counterstrike") {
         // upper right
         const x = Math.max(PAD, maxW - icon.offsetWidth - PAD);
-        const y = Math.max(PAD, -maxH);
+        const y = PAD;
         setPos(icon, x, y);
+        return;
       }
+
+      if (id === "accom") {
+        // middle right
+        const x = PAD;
+        const y = Math.max(PAD, (maxH - icon.offsetHeight) / 2) - maxH * 0.1 + icon.offsetHeight / 2.4;
+        setPos(icon, x, y);
+        return;
+      }
+
+      setPos(icon, PAD, PAD + i * STEP_Y);
     });
   };
 
   // If images affect size, wait one frame so offsetWidth/Height are correct
   requestAnimationFrame(placeDefaults);
+  window.addEventListener("desktop-shown", () => {
+    requestAnimationFrame(placeDefaults);
+  });
 
   let drag = null;
   let suppressClick = false;
@@ -471,3 +529,62 @@ openWindow("aboutWindow");
     e.stopPropagation();
   }, true);
 })();
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   if (!dialog) return;
+//   if (!dialog.open) dialog.show();
+
+//   dialog.addEventListener("click", (e) => {
+//     if (e.target === popupclose) {
+//       dialog.hidden = true;
+//     }
+//   });
+// });
+
+const popup = document.getElementById("antivirusPopup");
+const shield = document.querySelector(".tray .antivirus");
+const closeBtn = popup?.querySelector(".antiv__close");
+
+function placePopupAboveShield() {
+  if (!popup || !shield || !popup.open) return;
+
+  const tray = shield.closest(".tray");
+  if (!tray) return;
+
+  // Move the whole dialog only.
+  const OFFSET_RIGHT = 66;
+  const OFFSET_UP = 2;
+
+  const trayRect = tray.getBoundingClientRect();
+  const right = Math.max(8, window.innerWidth - trayRect.right + 8 + OFFSET_RIGHT);
+  const bottom = Math.max(8, window.innerHeight - trayRect.top + OFFSET_UP);
+
+  popup.style.left = "auto";
+  popup.style.top = "auto";
+  popup.style.right = `${Math.round(right)}px`;
+  popup.style.bottom = `${Math.round(bottom)}px`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (!popup) return;
+  popup.show(); // non-modal
+  requestAnimationFrame(placePopupAboveShield);
+});
+
+window.addEventListener("resize", placePopupAboveShield);
+window.addEventListener("desktop-shown", placePopupAboveShield);
+const tray = document.querySelector(".tray");
+if (tray) {
+  new ResizeObserver(placePopupAboveShield).observe(tray);
+}
+
+closeBtn?.addEventListener("click", () => popup.hidden = true);
+
+accomItem?.addEventListener("dblclick", () => {
+  if (!accomItem) return;
+
+  const url = accomItem.dataset.href;
+  if (!url) return;
+
+  window.open(url, "_blank", "noopener");
+});

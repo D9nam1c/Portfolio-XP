@@ -14,6 +14,10 @@
   --font: Tahoma, "Segoe UI", system-ui, sans-serif;
 }
 
+[hidden]{
+    display: none !important;
+  }
+
 *{ box-sizing:border-box; }
 html, body{ height:100%; }
 body{
@@ -22,6 +26,209 @@ body{
   overflow:hidden;
 }
 
+/* Login Screen Section */
+.login-screen{
+  position: absolute;
+  inset: 0; /* top to bottom and right to left offsets set to 0 */
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: 
+  ". logo ."
+  ". label ."
+  ". . . ";
+  background: linear-gradient(
+    to bottom,
+    #072883 0 15%, /* Upper border */
+    #5F80D3 15% 85%, /* Middle/Interactive part */
+    #072883 85% 100% /* Bottom border */
+  );
+}
+
+.login__separator{
+  position: absolute;
+  left: 52.5%;
+  top: 20vh;
+  bottom: 20vh;
+  width: 1px;
+  background: rgba(255, 255, 255,.22);
+  pointer-events: none;
+}
+
+.login__separator::after{
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(44,72,146,.45);     /* dark edge */
+}
+
+.os_logotype{
+  width: 210px;
+  height: 210px;
+  grid-area: logo;
+  display: grid;
+  /* margin-left: 40px; */
+  transform: translate(70%, 30%);
+}
+
+.login__panel{
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -30%);
+  width: max-content;
+  /* display: inline-flex; */
+  gap: 20px;
+
+}
+
+.user__pfp{
+  width:60px;
+  height:60px;
+  border-radius:6px;
+  border:1px solid rgba(0,0,0,.35);
+  background:#fff;
+}
+
+.system__label{
+  font-size: 23px;
+  text-shadow: 0 2px 2px rgba(0,0,0,.5);
+  color: rgba(255, 255, 255);
+  margin-right: 20px;
+  grid-area: label;
+  display: inline-flex;
+}
+
+.login__icon{
+  display: inline-flex;
+  width: 250px;
+  background-color: transparent;
+  align-items: start;
+  gap: 12px;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.login__icon * { cursor: inherit; }
+.login__icon:hover { filter: brightness(1.08) }
+.login__icon:active { filter: brightness(0.75); transform: translateY(1px); }
+
+.login__icon .user__label{
+  margin-top: 5px;
+  font-size: 21px;
+  color:rgb(255, 255, 255);
+}
+
+.turn__off{
+  position: absolute;
+  left: clamp(16px, 2.5vw, 40px);    /* responsive from left */
+  bottom: clamp(16px, 6vh, 42px);    /* responsive from bottom */
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.turn__off * { cursor: inherit; }
+.turn__off:hover { filter: brightness(1.08); }
+.turn__off:active { filter: brightness(0.75); transform: translateY(1px); }
+
+.shut__down{
+  width: 40px;
+  height: 40px;
+}
+
+.turn__off .power__label{
+  margin: 0;
+  line-height: 1;
+  display: inline-flex;
+  font-size: 18px;
+  text-shadow: 0 2px 2px rgba(0,0,0,.5);
+  color: rgba(255, 255, 255);
+}
+
+/* End of the Login Screen Section */
+/* --------------------------------------------- */
+/* Welcome Screen Section */
+
+.welcome-screen{
+  position: absolute;
+  inset: 0; /* top to bottom and right to left offsets set to 0 */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 1fr auto 1fr;
+  grid-template-areas: 
+  ". . ."
+  ". title ."
+  ". . . ";
+  background: linear-gradient(
+    to bottom,
+    #072883 0 15%, /* Upper border */
+    #5F80D3 15% 85%, /* Middle/Interactive part */
+    #072883 85% 100% /* Bottom border */
+  );
+}
+
+.welcome__title-row{
+  grid-area: title;
+  justify-self:center;
+  align-self:center;
+  display:inline-flex;
+  align-items:flex-end;
+  gap:2px;
+}
+
+.welcome__loader{
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.welcome__label{
+  margin: 0;
+  font-size: 40px;
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 0 2px 2px rgba(0,0,0,.5);
+  color: rgba(255, 255, 255);
+  padding: 2px 5px;
+}
+
+.welcome__loader span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #fff;
+  opacity: .35;
+  animation: dotPulse 1s infinite ease-in-out;
+}
+
+.welcome__loader span:nth-child(2){
+  animation-delay:.15s;
+}
+
+.welcome__loader span:nth-child(3){
+  animation-delay:.3s;
+}
+
+@keyframes dotPulse{
+  0%, 80%, 100%{
+    transform:scale(.8);
+    opacity:.35;
+  }
+  40%{
+    transform: scale(1.15);
+    opacity:1;
+  }
+}
+
+/* End of the Welcome Screen section */
+
 /* Desktop wallpaper vibe */
 .desktop{
   position:relative;
@@ -29,11 +236,28 @@ body{
   background: url("assets/wallpaper/background.png") center/cover no-repeat;
 }
 
+.contact__img{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  height: auto;
+}
+
+.contact__img img{
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+}
+
+.contact__img a, .contact__img p{ margin: 0; white-space: nowrap; } 
+
 /* Icons */
 .icons{
   position:absolute;
   inset:0 0 44px 0; /* leave room for taskbar */
   display:block;    /* NOT grid */
+  z-index: 10;
 }
 
 .icon{
@@ -76,6 +300,16 @@ body{
   text-align:center;
 }
 
+.bin__img img{
+  width: 35px;
+  height: 35px;
+}
+
+.bin__img p { 
+  margin: 0; 
+  white-space: nowrap; 
+  font-size: 13px;
+}
 
 /* Window */
 .window-area{ position:absolute; inset:0 0 44px 0; }
@@ -593,12 +827,124 @@ h1{ margin: 0 0 10px; font-size:22px; }
 }
 
 .tray{
-  display:flex;
+  display:inline-flex;
   align-items:center;
   height:34px;
-  padding:0 10px;
-  border-radius:8px;
-  background: rgba(0,0,0,.2);
+  padding:0 30px;
+  border-radius:6px;
+  gap: 6px;
+  background: #00bbff;
   color:white;
   font-size:13px;
 }
+
+.tray .internet__connection{
+  width: 28px;
+  height: 28px;
+}
+
+.tray .antivirus{
+  width: 20px;
+  height: 20px;
+}
+/* Antivirus Pop-up */
+
+.antivirus-popup{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: auto;
+  top: auto;
+  right: 8px;
+  bottom: 40px;
+  transform: none;
+  max-width: calc(100vw - 40px);
+  width: 310px;
+  height: 80px;
+  padding: 10px 12px 14px;
+  border:1px solid rgba(0,0,0,.35);
+  border-radius:8px;
+  background:#E1E0C7;
+  box-shadow: 0 16px 34px rgba(0,0,0,.35);
+  z-index:10000;
+  justify-content: flex-start;
+
+  /* Animation */
+  opacity: 0;
+  transform: translateY(6px);
+  animation: fadeIn 450ms ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.antivirus-popup .alert{
+  width: 30px;
+  height: 30px;
+}
+
+.antivirus-popup .antiv__close{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  margin: 0;
+  /* background: linear-gradient(to bottom, #ff7c7c, #d32020); */
+  background: transparent;
+  align-self: flex-end;
+}
+.antivirus-popup .antiv__close:hover{
+  background: linear-gradient(to bottom, #ff7c7c, #d32020);
+}
+
+.antivirus-popup h2{
+  display: flex;
+  /* gap: 10px; */
+  font-size: 12px;
+  margin: 0;
+  align-items: center;
+  padding-right: 44px; /* to prevent text from going under the close button */
+}
+
+.antivirus-popup p{
+  font-size: 12px;
+  margin: 0;
+}
+
+.antivirus-popup::before{
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  right: 22px;
+  left: auto;
+  border: 12px solid transparent;
+  border-top-color: #7E7E6F;
+}
+
+.antivirus-popup::after{
+  content: "";
+  position: absolute;
+  bottom: -4.5px;
+  right: 26px;
+  left: auto;
+  border: 10px solid transparent;
+  border-top-color: #E1E0C7;
+}
+
+.accom__item{
+  background: transparent;
+  border:1px solid #d0d0d0;
+  border-radius:8px;
+  padding:10px 12px;
+  cursor: pointer;
+
+  -webkit-user-select:none;
+  user-select:none;
+  
+}
+.accom__item:hover{ filter: brightness(1.08); }
+.accom__item:focus{ outline:2px solid rgba(255, 255, 255, 0.65); outline-offset:2px; }
+.accom__item:active{ filter: brightness(0.75); transform: translateY(1px); }
