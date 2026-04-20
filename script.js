@@ -18,36 +18,36 @@ const accomWindow = document.getElementById("successes");
 
 let z = 100;
 let closedId = null;
-// function initLoginFlow() {
-//   if (login) login.hidden = false;
-//   if (welcome) welcome.hidden = true;
-//   if (desktop) desktop.hidden = true;
+function initLoginFlow() {
+  if (login) login.hidden = false;
+  if (welcome) welcome.hidden = true;
+  if (desktop) desktop.hidden = true;
 
-//   loginBtn?.addEventListener("click", () => {
-//     if (login) login.hidden = true;
-//     if (welcome) welcome.hidden = false;
-//     if (desktop) desktop.hidden = true;
+  loginBtn?.addEventListener("click", () => {
+    if (login) login.hidden = true;
+    if (welcome) welcome.hidden = false;
+    if (desktop) desktop.hidden = true;
 
-//     // XP-like short welcome delay before showing desktop
-//     setTimeout(() => {
-//       if (welcome) welcome.hidden = true;
-//       if (desktop) desktop.hidden = false;
-//       window.dispatchEvent(new Event("desktop-shown"));
-//     }, 3000);
-//   });
+    // XP-like short welcome delay before showing desktop
+    setTimeout(() => {
+      if (welcome) welcome.hidden = true;
+      if (desktop) desktop.hidden = false;
+      window.dispatchEvent(new Event("desktop-shown"));
+    }, 3000);
+  });
 
-//   shutdown?.addEventListener("click", () => {
-//     // Browser tabs usually can't be closed unless opened by script.
-//     window.open("", "_self");
-//     window.close();
-//   });
-// }
+  shutdown?.addEventListener("click", () => {
+    // Browser tabs usually can't be closed unless opened by script.
+    window.open("", "_self");
+    window.close();
+  });
+}
 
-// if (document.readyState === "loading") {
-//   window.addEventListener("load", initLoginFlow, { once: true });
-// } else {
-//   initLoginFlow();
-// }
+if (document.readyState === "loading") {
+  window.addEventListener("load", initLoginFlow, { once: true });
+} else {
+  initLoginFlow();
+}
 
 // ---------- helpers ----------
 function isStartMenuOpen() {
