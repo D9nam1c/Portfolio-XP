@@ -231,6 +231,28 @@ body{
 
 /* End of the Welcome Screen section */
 
+.shutdown-screen{
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: #000;
+}
+
+.shutdown-screen__text{
+  margin: 0;
+  color: #d98332;
+  font-size: clamp(18px, 2.6vw, 38px);
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-shadow: 1px 1px 0 #5d2300;
+  -webkit-font-smoothing: none;
+}
+
 /* Desktop wallpaper vibe */
 .desktop{
   position:relative;
@@ -252,7 +274,7 @@ body{
   flex: 0 0 30px;
 }
 
-.contact__img a, .contact__img p{ margin: 0; white-space: nowrap; } 
+.contact__img a, .contact__img p{ margin: 8px; white-space: nowrap;} 
 
 /* Icons */
 .icons{
@@ -945,8 +967,95 @@ h1{ margin: 0 0 10px; font-size:22px; }
 
   -webkit-user-select:none;
   user-select:none;
-  
+  text-align: start;
 }
+
 .accom__item:hover{ filter: brightness(1.08); }
 .accom__item:focus{ outline:2px solid rgba(255, 255, 255, 0.65); outline-offset:2px; }
 .accom__item:active{ filter: brightness(0.75); transform: translateY(1px); }
+
+.accom__item strong{
+  font-size: 14px;
+  color: #111;
+}
+
+.accom__item.proj__item a{
+  display: inline-flex;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.accom__item.proj__item p{
+  margin: 0;
+  font-size: 12px;
+  color: #626262;
+}
+
+.accom__item.proj__item strong{
+  font-size: 14px;
+  color: #111;
+}
+
+.accom__item.proj__item .chips {
+  size: 10%;
+  gap: 4px;
+}
+
+.accom__item.proj__item .chips li{
+  font-size: 10px;
+  padding: 4px 8px;
+}
+
+.status-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-flex;
+  position: relative;
+  align-self: center;
+}
+
+.status-dot--yellow{
+  background: #f2c200;
+}
+
+.status-dot--green{
+  background: #4fe04b;
+}
+
+.status-dot--cyan{
+  background: #00bbff;
+}
+
+.status-dot--cyan::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0,187,255,0.45);
+  animation: pulseRipple 1.4s ease-out infinite;
+}
+
+.status-dot--green::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(79, 224, 75, 0.45);
+  animation: pulseRipple 3.0s ease-out infinite;
+}
+
+.status-dot--yellow::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(242, 194, 0, 0.45);
+  animation: pulseRipple 1.4s ease-out infinite;
+}
+
+@keyframes pulseRipple{
+  0%   { transform: scale(1);   opacity: 0.8; }
+  70%  { transform: scale(2.4); opacity: 0;   }
+  100% { transform: scale(2.4); opacity: 0;   }
+}

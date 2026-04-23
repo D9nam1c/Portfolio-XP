@@ -10,18 +10,48 @@ const allProgramsMenu = document.getElementById("allProgramsMenu");
 const login = document.getElementById("loginScreen");
 const welcome = document.getElementById("welcomeScreen");
 const desktop = document.getElementById("desktop");
+const shutdownScreen = document.getElementById("shutdownScreen");
+const goodbyeScreen = document.getElementById("goodbyeScreen");
 const loginBtn = document.querySelector(".login__icon");
 const shutdown = document.querySelector(".turn__off");
 
 const accomItem = document.querySelector(".accom__item");
+const projItem = document.querySelector(".accom__item.proj__item");
 const accomWindow = document.getElementById("successes");
 
 let z = 100;
 let closedId = null;
-function initLoginFlow() {
-  if (login) login.hidden = false;
+
+function showShutdownScreen() {
+  if (login) login.hidden = true;
   if (welcome) welcome.hidden = true;
   if (desktop) desktop.hidden = true;
+  if (goodbyeScreen) goodbyeScreen.hidden = false;
+  setStartMenuOpen(false);
+
+  setTimeout(() => {
+    if (shutdownScreen) 
+      if (shutdownScreen) shutdownScreen.hidden = true;
+      shutdownScreen.hidden = false;
+  }, 2000);
+}
+
+function shutdownPortfolio() {
+  // Browsers only allow closing tabs opened via JS. If close is blocked,
+  // fall back to an XP-style shutdown screen so the button still works.
+  // window.open("", "_self");
+  // window.close();
+
+  setTimeout(() => {
+    if (!window.closed) showShutdownScreen();
+  }, 60);
+}
+
+function initLoginFlow() {
+  if (login) login.hidden = false; //temp: skip login for now (toggle when neded)
+  if (welcome) welcome.hidden = true;
+  if (desktop) desktop.hidden = true; // temp (toggle when needed)
+  if (shutdownScreen) shutdownScreen.hidden = true;
 
   loginBtn?.addEventListener("click", () => {
     if (login) login.hidden = true;
@@ -33,14 +63,10 @@ function initLoginFlow() {
       if (welcome) welcome.hidden = true;
       if (desktop) desktop.hidden = false;
       window.dispatchEvent(new Event("desktop-shown"));
-    }, 3000);
+    }, 1500);
   });
 
-  shutdown?.addEventListener("click", () => {
-    // Browser tabs usually can't be closed unless opened by script.
-    window.open("", "_self");
-    window.close();
-  });
+  shutdown?.addEventListener("click", shutdownPortfolio);
 }
 
 if (document.readyState === "loading") {
@@ -248,7 +274,7 @@ startMenu?.addEventListener("click", (e) => {
     login.hidden = false;
   }
   if (action === "shutdown") {
-    window.close();
+    shutdownPortfolio();
   }
 });
 
@@ -584,10 +610,19 @@ if (tray) {
 
 closeBtn?.addEventListener("click", () => popup.hidden = true);
 
-accomItem?.addEventListener("dblclick", () => {
+accomItem?.addEventListener("click", () => {
   if (!accomItem) return;
 
   const url = accomItem.dataset.href;
+  if (!url) return;
+
+  window.open(url, "_blank", "noopener");
+});
+
+projItem?.addEventListener("click", () => {
+  if (!projItem) return;
+
+  const url = projItem.dataset.href;
   if (!url) return;
 
   window.open(url, "_blank", "noopener");

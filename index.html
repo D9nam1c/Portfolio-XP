@@ -34,6 +34,21 @@
   </div>
 </div>
 
+<!-- Shutdown Screen -->
+<div class="welcome-screen goodbye-screen" id="goodbyeScreen" data-screen="goodbye" hidden role="status" aria-live="polite" aria-label="Goodbye">
+  <div class="welcome__title-row">
+    <div class="welcome__label">goodbye</div>
+    <div class="welcome__loader" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</div>
+
+<!-- Safe Screen -->
+<div class="shutdown-screen" id="shutdownScreen" data-screen="shutdown" hidden role="status" aria-live="polite" aria-label="Shutting down">
+  <p class="shutdown-screen__text">It's now safe to turn off<br>your computer.</p>
+</div>
+
   <!-- Desktop -->
   <main class="desktop" id="desktop" aria-label="Windows XP Desktop">
 
@@ -45,7 +60,7 @@
         Your computer might be at risk 
       </h2>
       <p> Your antivirus software might be out of date </p>
-      <p> Click here to update now. </p>
+      <p> Click <a href="https://github.com/D9nam1c?tab=packages&repo_name=Portfolio-XP" data-action="update">here</a> to update now. </p>
     </dialog>
 
     <!-- Icons -->
@@ -85,12 +100,12 @@
         <div class="icon__label">Resume</div>
       </button>
 
-      <button class="icon" data-href="https://store.steampowered.com/app/10/CounterStrike/" data-icon-id="CounterStrike" aria-label="Counter_Strike">
+      <!-- <button class="icon" data-href="https://store.steampowered.com/app/10/CounterStrike/" data-icon-id="CounterStrike" aria-label="Counter_Strike">
         <div class="icon__img">
           <img src="assets/icons/counter-strike.png" alt="">
         </div>
         <div class="icon__label">Counter Strike</div>
-      </button>
+      </button> -->
 
       <button class="icon" data-open="successes" data-icon-id="accom" aria-label="Accomplishments">
         <div class="icon__img">
@@ -107,7 +122,9 @@
       <article class="window" id="aboutWindow" role="dialog" aria-label="About Me" data-open="false">
         <header class="titlebar" data-drag>
           <div class="titlebar__left">
-            <span class="titlebar__icon" aria-hidden="true">👤</span>
+            <span class="titlebar__icon" aria-hidden="true">
+              <img src="assets/icons/computer.png" alt="" />
+            </span>
             <span class="titlebar__title">About Me</span>
           </div>
           <div class="titlebar__buttons">
@@ -118,7 +135,14 @@
         </header>
         <div class="window__content">
           <h1>Hi, I’m Volodymyr 👋</h1>
-          <p>I'm a Computer Science student. I build apps, systems, and fun UI experiments.</p>
+          <p>I'm a Computer Science student at Virginia Tech with hands-on 
+            experience in both software and hardware-focused projects. I worked on real-time 
+            robotics updates, embedded C programming, system documentation, and cross-team 
+            collaboration to improve robot control functions. I enjoy building practical projects, 
+            from Arduino-based devices to front-end web experiences, and I work with Java, Python, 
+            C/C++, Swift, HTML/CSS/JavaScript, Linux, and Git. I’m fluent in English and a native 
+            speaker of Ukrainian and Russian, and I’m currently looking for software engineering 
+            internship opportunities for Summer 2026.</p>
           <p> Stuff I worked with: </p>
           <ul class="chips">
             <li>Swift / iOS</li>
@@ -216,7 +240,9 @@
       <article class="window" id="projectsWindow" role="dialog" aria-label="Projects" data-open="false">
         <header class="titlebar" data-drag>
           <div class="titlebar__left">
-            <span class="titlebar__icon" aria-hidden="true">📁</span>
+            <span class="titlebar__icon" aria-hidden="true">
+              <img src="assets/icons/documents.png" alt="">
+            </span>
             <span class="titlebar__title">Projects</span>
           </div>
           <div class="titlebar__buttons">
@@ -227,18 +253,63 @@
         </header>
         <div class="window__content">
           <div class="list">
-            <div class="list__item">
-              <strong>CampusEats</strong>
-              <div class="muted">SwiftUI food ordering app (iPhone/iPad).</div>
-            </div>
-            <div class="list__item">
-              <strong>GISDB</strong>
-              <div class="muted">Custom data structures + spatial indexing.</div>
-            </div>
-            <div class="list__item">
-              <strong>Space Invaders Clone</strong>
-              <div class="muted">SpriteKit game with sound + scoring.</div>
-            </div>
+            <button class="accom__item proj__item" data-href="https://github.com/D9nam1c/SmartRoute">
+              <strong>SmartRoute</strong>
+              <p>A desktop network optimization app for macOS and Linux that aims to 
+                improve connection quality by rerouting internet traffic 
+                to the apps of user's choice. Using VPN and proxy-based technologies, 
+                the app is designed to monitor network conditions, reduce latency where 
+                possible, and give users more control over how traffic is handled, 
+                including the option to reroute or prioritize traffic for specific 
+                applications they choose.</p>
+              <ul class="chips">
+                <li>Python</li>
+                <li>Go</li>
+                <li>C++</li>
+                <li>Rust</li>
+                <li>macOS</li>
+                <li>Linux</li>
+              </ul>
+              <a>Status: In development <span class="status-dot status-dot--yellow" aria-label="In development"></span></a>
+            </button>
+            <!-- Divider -->
+            <button class="accom__item proj__item" data-href="https://github.com/D9nam1c/Portfolio-XP">
+              <strong>Portfolio XP</strong>
+              <p>Website portfolio in retro OS style. it recreates core OS interactions like desktop icons, 
+                draggable windows, a Start menu, login/welcome flow, and custom UI effects. The project highlights my frontend skills, 
+                event handling, responsive positioning, and pixel-style interface design while turning 
+                my portfolio into a nostalgic, functional product.</p>
+              <ul class="chips">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+              </ul>
+              <a>Status: Maintaining <span class="status-dot status-dot--cyan" aria-label="Maintaining"></span></a>
+            </button>
+            <!-- Divider -->
+            <button class="accom__item proj__item" data-href="https://github.com/yoshiask/SCUTTLE-BeagleY-AI-Demo">
+              <strong>SCUTTLE-BeagleY-AI-Demo</strong>
+              <p>Python-based robotics software project built to run and validate the SCUTTLE robot 
+                on BeagleY-AI hardware. It combines low-level control modules (encoders, motors, PWM, 
+                gamepad input) with motion logic (kinematics, inverse kinematics, and speed control), 
+                plus a live gamepad demo for driving the robot.</p>
+              <ul class="chips">
+                <li>Python</li>
+              </ul>
+              <a>Status: Completed <span class="status-dot status-dot--green" aria-label="Completed"></span></a>
+            </button>
+            <!-- Divider -->
+             <button class="accom__item proj__item" data-href="https://github.com/justinzhang2023F/Final-Project-Mobile-Dev">
+              <strong>Space-invaders like game for iOS</strong>
+              <p> Space Invaders–style arcade game in Swift as a collaborative software design project. 
+                The game captures the classic feel of the original with player-controlled movement, waves of 
+                enemies, and score-based gameplay, while also reflecting our focus on clean design, 
+                structured game logic, and maintainable code.</p>
+              <ul class="chips">
+                <li>Swift</li>
+              </ul>
+              <a>Status: Completed <span class="status-dot status-dot--green" aria-label="Completed"></span></a>
+             </button>
           </div>
         </div>
       </article>
@@ -329,10 +400,10 @@
         </div>
 
         <div class="start-menu__col start-menu__col--right">
-          <button class="start-item start-item--right" data-open="projectsWindow">
+          <!-- <button class="start-item start-item--right" data-open="projectsWindow">
             <img src="assets/icons/Folder Closed.png" alt="" />
             <span>My Documents</span>
-          </button>
+          </button> -->
           <button class="start-item start-item--right" data-open="lastClosedWindow">
             <img src="assets/icons/Detail View.png" alt="" />
             <span>My Recent Documents</span>
@@ -341,7 +412,7 @@
             <img src="assets/icons/computer.png" alt="" />
             <span>My Computer</span>
           </button>
-          <button class="start-item start-item--right" data-href="https://github.com/D9nam1c/Portfolio-XP">
+          <button class="start-item start-item--right" data-open="contactWindow">
             <img src="assets/icons/Email.png" alt="" />
             <span>Help and Support</span>
           </button>
@@ -360,7 +431,7 @@
     <nav class="start-flyout" id="allProgramsMenu" hidden aria-label="All Programs">
       <button class="flyout-item" type="button" data-href="https://github.com/D9nam1c/Portfolio-XP/releases">
         <img src="assets/icons/Go.png" alt="" />
-        <span>Windows Update</span>
+        <span>System Updates</span>
       </button>
 
       <div class="flyout-sub">
