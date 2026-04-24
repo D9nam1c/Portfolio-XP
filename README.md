@@ -30,7 +30,7 @@ This project showcases my frontend skills in:
 
 - HTML
 - CSS
-- Vanilla JavaScript
+- JavaScript
 
 ## 👤 About This Portfolio
 
