@@ -15,9 +15,10 @@ const goodbyeScreen = document.getElementById("goodbyeScreen");
 const loginBtn = document.querySelector(".login__icon");
 const shutdown = document.querySelector(".turn__off");
 
-const accomItem = document.querySelector(".accom__item");
-const projItem = document.querySelector(".accom__item.proj__item");
+const accomItem = document.querySelectorAll(".accom__item");
+const projItem = document.querySelectorAll(".accom__item.proj__item");
 const accomWindow = document.getElementById("successes");
+const projWindow = document.getElementById("projectsWindow");
 
 let z = 100;
 let closedId = null;
@@ -610,20 +611,15 @@ if (tray) {
 
 closeBtn?.addEventListener("click", () => popup.hidden = true);
 
-accomItem?.addEventListener("click", () => {
-  if (!accomItem) return;
+accomWindow?.addEventListener("click", (e) => {
+  const item = e.target.closest(".accom__item[data-href]");
+  if (!item) return;
+  window.open(item.dataset.href, "_blank", "noopener");
 
-  const url = accomItem.dataset.href;
-  if (!url) return;
-
-  window.open(url, "_blank", "noopener");
 });
 
-projItem?.addEventListener("click", () => {
-  if (!projItem) return;
-
-  const url = projItem.dataset.href;
-  if (!url) return;
-
-  window.open(url, "_blank", "noopener");
+projWindow?.addEventListener("click", (e) => {
+  const item = e.target.closest(".proj__item[data-href]");
+  if (!item) return;
+  window.open(item.dataset.href, "_blank", "noopener");
 });
