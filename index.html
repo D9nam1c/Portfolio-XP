@@ -8,7 +8,7 @@
 </head>
 <body>
   <!-- Login Screen -->
-   <div class="login-screen" id="loginScreen" data-screen="login" hidden role="status" aria-live="polite" aria-label="XP Welcome">
+   <div class="login-screen" id="loginScreen" data-screen="login" role="status" aria-live="polite" aria-label="XP Welcome">
     <div class="login__panel">
       <img class="os_logotype" src="assets/icons/os_logo.png" alt="logo" />
       <div class="system__label">To begin, click your user name</div>
@@ -50,7 +50,7 @@
 </div>
 
   <!-- Desktop -->
-  <main class="desktop" id="desktop" aria-label="Windows XP Desktop">
+  <main class="desktop" id="desktop" hidden aria-label="Windows XP Desktop">
 
     <!-- Antivirus Pop-up -->
     <dialog class="antivirus-popup" id="antivirusPopup">
@@ -100,12 +100,12 @@
         <div class="icon__label">Resume</div>
       </button>
 
-      <!-- <button class="icon" data-href="https://store.steampowered.com/app/10/CounterStrike/" data-icon-id="CounterStrike" aria-label="Counter_Strike">
+      <button class="icon" data-href="https://store.steampowered.com/app/10/CounterStrike/" data-icon-id="CounterStrike" aria-label="Counter_Strike">
         <div class="icon__img">
           <img src="assets/icons/counter-strike.png" alt="">
         </div>
         <div class="icon__label">Counter Strike</div>
-      </button> -->
+      </button>
 
       <button class="icon" data-open="successes" data-icon-id="accom" aria-label="Accomplishments">
         <div class="icon__img">
@@ -462,7 +462,7 @@
           <span>Games</span>
         </button>
         <div class="start-submenu" aria-label="Games">
-          <button class="flyout-item" type="button" data-open="projectsWindow">
+          <button class="flyout-item" type="button" data-href="https://store.steampowered.com/app/10/CounterStrike/">
             <img src="assets/icons/counter-strike.png" alt="" />
             <span>Counter-Strike</span>
           </button>
@@ -480,6 +480,7 @@
 
       <div class="tray" aria-label="System tray">
         <p> EN </p>
+        <img class="internet__connection" src="assets/icons/Steam.png" alt="Steam" aria-hidden="true" />
         <img class = "antivirus" src="assets/icons/antivirus.gif" alt="Antivirus" aria-hidden="true" />
         <img class="internet__connection" src="assets/icons/internet.gif" alt="Internet" aria-hidden="true" />
         <span class="tray__clock" id="clock">3:14 PM</span>
