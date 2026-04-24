@@ -48,9 +48,9 @@ function shutdownPortfolio() {
 }
 
 function initLoginFlow() {
-  if (login) login.hidden = true; //temp: skip login for now (toggle when neded)
+  if (login) login.hidden = false; //temp: skip login for now (toggle when neded)
   if (welcome) welcome.hidden = true;
-  if (desktop) desktop.hidden = false; // temp (toggle when needed)
+  if (desktop) desktop.hidden = true; // temp (toggle when needed)
   if (shutdownScreen) shutdownScreen.hidden = true;
 
   loginBtn?.addEventListener("click", () => {
