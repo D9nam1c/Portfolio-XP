@@ -40,5 +40,5 @@ while presenting my background, projects, and achievements in a memorable way.
 ## 💼 Resources Used:
 - The following icons were AI generated: "Accomplishmens", "Contacts",
 Antivirus(including the yellow shield), Internet connection
-- The rest of the icons comes from [MarchMountain Pack](https://github.com/marchmountain/-Windows-XP-High-Resolution-Icon-Pack)
+- The rest of the icons come from [MarchMountain Pack](https://github.com/marchmountain/-Windows-XP-High-Resolution-Icon-Pack)
 - Fictional os logo (located on login screen) was also AI generated
